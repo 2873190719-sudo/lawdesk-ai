@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LawDesk AI · 使用说明</title>
+<style>
+:root{--bg:#F6F3EC;--card:#FFFEFA;--text:#34383B;--muted:#92989A;--primary:#657D91;--accent:#C6A477;--line:#E8E4DC;--danger:#C98272;--success:#86A58A}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:14px/1.8 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:36px 20px 60px}
+header{display:flex;align-items:center;gap:14px;margin-bottom:24px}
+.mark{width:48px;height:48px;border-radius:12px;background:#596875;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;letter-spacing:1px}
+h1{font-size:22px;margin:0}h1 small{display:block;font-size:12px;color:var(--muted);font-weight:400;letter-spacing:1px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 22px;margin-bottom:14px;box-shadow:0 1px 3px rgba(52,56,59,.05)}
+h2{font-size:15px;margin:0 0 12px;color:var(--primary);display:flex;align-items:center;gap:8px}
+h2 .n{width:22px;height:22px;border-radius:50%;background:var(--primary);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;flex:none}
+p{margin:0 0 10px}p:last-child{margin-bottom:0}
+code{background:#F3F0E9;border:1px solid var(--line);border-radius:4px;padding:2px 6px;font:12.5px/1.5 Consolas,"Courier New",monospace}
+.step{display:flex;gap:12px;margin-bottom:12px}.step:last-child{margin-bottom:0}
+.step .i{width:24px;height:24px;border-radius:50%;background:#EDF2F5;color:var(--primary);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none}
+.tag{display:inline-block;border-radius:20px;padding:2px 10px;font-size:11.5px;background:#EDF2F5;color:var(--primary);margin-right:6px}
+.tag.win{background:#E8F0F6}.tag.mac{background:#F1EEF6;color:#776C93}
+.alert{border-radius:8px;padding:11px 14px;font-size:13px;margin-top:10px}
+.alert.warn{background:#F9F3E8;border:1px solid #EDE0C9;color:#8A7047}
+.alert.danger{background:#FBEEEB;border:1px solid #EED9D2;color:#8E5445}
+.alert.info{background:#EDF2F5;border:1px solid #DCE5EB;color:#4F687D}
+ul{margin:6px 0 0;padding-left:20px}li{margin-bottom:5px}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-top:6px}
+td,th{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{color:var(--muted);font-weight:600;font-size:12px;background:#FBF9F4}
+tr:last-child td{border-bottom:none}
+footer{text-align:center;color:var(--muted);font-size:12px;margin-top:26px}
+.kbd{border:1px solid var(--line);background:#fff;border-radius:4px;padding:1px 6px;font-size:11px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><div class="mark">LD</div><div><h1>LawDesk AI · 使用说明<small>律师个人智能业务管理工作台 · 单机独立版</small></h1></div></header>
+
+<div class="card">
+  <h2><span class="n">0</span>先弄清楚：这是单机版</h2>
+  <p>整套系统<b>只在你自己的电脑上运行</b>，所有案件、客户、合同、文书、证据、附件都保存在本机硬盘，<b>不会上传到任何服务器，也不会联网同步</b>。</p>
+  <p>因此每个人的数据都是<b>各自独立</b>的：你和给你这份程序的朋友各用各的，互相看不到对方的数据。如果需要把某批资料交给对方，用系统里的「系统设置 → 导入导出」或「备份与恢复」手动传文件即可。</p>
+  <div class="alert info">页面刷新、关掉重开、重启电脑，数据都会保留。只有<b>删除 <code>data/</code> 目录</b>才会真正丢失资料。</div>
+</div>
+
+<div class="card">
+  <h2><span class="n">1</span>准备环境</h2>
+  <p>需要 <b>Python 3.9 或更高版本</b>（无需安装任何第三方库，也无需联网）。</p>
+  <ul>
+    <li>Windows：到 python.org 下载安装，安装时勾选 <b>“Add Python to PATH”</b>；或在命令行输入 <code>python --version</code> 确认已有。</li>
+    <li>macOS / Linux：系统通常自带，命令行输入 <code>python3 --version</code> 确认。</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h2><span class="n">2</span>启动</h2>
+  <div class="step"><div class="i">1</div><div><span class="tag win">Windows</span> 解压后双击 <code>start.bat</code>。会弹出一个黑色命令行窗口，<b>使用期间不要关闭它</b>。</div></div>
+  <div class="step"><div class="i">2</div><div><span class="tag mac">macOS / Linux</span> 在终端进入本目录，执行 <code>bash start.sh</code>。</div></div>
+  <div class="step"><div class="i">3</div><div>浏览器打开 <code>http://127.0.0.1:8765</code>，会自动进入工作台，无需手动登录。</div></div>
+  <div class="step"><div class="i">4</div><div>不用了就关闭命令行窗口（或按 <span class="kbd">Ctrl</span> + <span class="kbd">C</span>）停止服务，数据仍在硬盘上。</div></div>
+  <div class="alert warn">初始账号与密码会显示在 <code>start.bat</code> / <code>start.sh</code> 的启动提示里。<b>首次使用请到「系统设置 → 账户与偏好」修改密码</b>，避免他人打开你的电脑直接进入。</div>
+</div>
+
+<div class="card">
+  <h2><span class="n">3</span>数据在哪 / 怎么备份</h2>
+  <table>
+    <tr><th>内容</th><th>位置</th></tr>
+    <tr><td>全部业务数据（SQLite 关系型数据库）</td><td><code>data/lawdesk.db</code></td></tr>
+    <tr><td>上传的合同、证据、附件原件</td><td><code>data/uploads/</code></td></tr>
+    <tr><td>自动备份（含数据库 + 全部附件）</td><td><code>data/backups/</code></td></tr>
+  </table>
+  <p style="margin-top:10px">建议在「系统设置 → 备份与恢复」里定期点一次「创建备份」，并把整个 <code>data/</code> 目录另存到移动硬盘或加密网盘。<b>恢复备份会覆盖当前全部数据</b>，操作前系统会二次确认。</p>
+  <div class="alert danger">不要把 <code>data/</code> 放进网盘「实时同步」的目录：数据库文件在程序运行时被同步，可能损坏。要同步就先停止服务，再复制整个目录。</div>
+</div>
+
+<div class="card">
+  <h2><span class="n">4</span>功能速览</h2>
+  <ul>
+    <li>16 个模块：案件、客户、合同、文书中心、法律检索、证据、保全管理、常法客户、日程与期限、工时计费、知识库、AI 法律助手、经营分析等。</li>
+    <li>所有列表都支持新增、编辑、删除（二次确认）、搜索、筛选、排序、表格/卡片切换、批量操作、导入导出；误删可从「回收站」恢复，重要操作可在「操作日志」撤销。</li>
+    <li>模块之间数据互通：选客户自动带入资料、开庭日程同步案件关键日期、收款实时更新经营统计、文书自动归档到案件。</li>
+    <li>快捷键：<span class="kbd">Ctrl</span> + <span class="kbd">K</span> 全局搜索，<span class="kbd">Esc</span> 关闭弹窗，顶部计时器在任何页面都能用。</li>
+    <li>AI 助手默认使用「本地上下文模式」，只读取系统里已录入的资料并生成草稿与建议，<b>不编造法条、司法解释或判例</b>；如需生成式回答，可在「系统设置 → AI 配置」自行接入大模型接口。</li>
+  </ul>
+  <div class="alert warn">保全到期日、诉讼期限的辅助计算<b>仅供参考</b>，必须以实际裁定书、适用法律及具体案件情况为准；AI 生成内容与法律检索结果均须律师核验后方可作为正式依据。</div>
+</div>
+
+<div class="card">
+  <h2><span class="n">5</span>常见问题</h2>
+  <table>
+    <tr><th>现象</th><th>处理</th></tr>
+    <tr><td>双击 start.bat 一闪而过 / 提示找不到 Python</td><td>未安装 Python 或没勾选 Add to PATH。装好后重开；也可在本目录命令行执行 <code>python server.py</code> 查看报错。</td></tr>
+    <tr><td>提示端口被占用</td><td>先关闭已经开着的启动窗口；或设置环境变量换端口，例如 Windows 命令行执行 <code>set LAWDESK_PORT=8766 &amp;&amp; python server.py</code>，然后访问 <code>http://127.0.0.1:8766</code>。</td></tr>
+    <tr><td>朋友想从另一台电脑访问</td><td>这个版本刻意只监听本机地址，<b>不支持跨设备直接访问</b>。请给对方一份同样的分发包，让他在自己电脑上运行；需要协同办案则需另外部署服务端版本。</td></tr>
+    <tr><td>想换账号 / 多人共用一台电脑</td><td>「系统设置 → 账户与偏好 → 切换 / 注册账号」，每个账号的数据彼此隔离。</td></tr>
+  </table>
+</div>
+
+<footer>LawDesk AI · 本机运行，数据自主可控 · 案卷资料请注意保密</footer>
+</div>
+</body>
+</html>
